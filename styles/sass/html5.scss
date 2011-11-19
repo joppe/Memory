@@ -1,0 +1,29 @@
+@mixin rounded-corners($radius: 5) {
+    border-radius: #{$radius}px;
+    -moz-border-radius: #{$radius}px;
+    -webkit-border-radius: #{$radius}px;
+}
+
+@mixin box-shadow($horizontal, $vertical, $blur, $spread, $color, $inset: '') {
+    @if $inset == 'inset' {
+        -webkit-box-shadow: $inset #{$horizontal}px #{$vertical}px #{$blur}px #{$spread}px $color;
+        -moz-box-shadow: $inset #{$horizontal}px #{$vertical}px #{$blur}px #{$spread}px $color;
+        box-shadow: $inset #{$horizontal}px #{$vertical}px #{$blur}px #{$spread}px $color;
+    } @else {
+        -webkit-box-shadow: #{$horizontal}px #{$vertical}px #{$blur}px #{$spread}px $color;
+        -moz-box-shadow: #{$horizontal}px #{$vertical}px #{$blur}px #{$spread}px $color;
+        box-shadow: #{$horizontal}px #{$vertical}px #{$blur}px #{$spread}px $color;
+    }
+}
+
+@mixin text-shadow($horizontal, $vertical, $blur, $color) {
+    text-shadow: #{$horizontal}px #{$vertical}px #{$blur}px $color;
+    filter: dropshadow(color=$color, offx=$horizontal, offy=$vertical);
+}
+
+@mixin opacity($value) {
+    filter:alpha(opacity=$value*100); /* msie */
+    -moz-opacity: $value; /* firefox 1.0 */
+    -khtml-opacity: $value; /* webkit */
+    opacity: $value; /* css 3 */
+}
