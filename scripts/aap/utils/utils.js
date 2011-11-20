@@ -20,11 +20,11 @@ aap.utils = {
 	 */
 	defaultValue: function (supplied_value, default_value) {
 		var value = supplied_value;
-		
+
 		if (aap.utils.isUndefined(supplied_value) === true) {
 			value = default_value;
 		}
-		
+
 		return value;
 	},
 
@@ -89,35 +89,35 @@ aap.utils.createUniqueId = (function () {
 	function generateRandomString() {
        return (((1+Math.random()) * 0x10000) | 0).toString(16).substring(1);
     }
-	
+
 	function generateUniqueId() {
 		var unique_id = '';
-		
+
 		jQuery.each(format, function (index, value) {
 			var loops = parseInt(value, 10) / 4,
 				index;
-			
+
 			if (unique_id !== '') {
 				unique_id += '-';
 			}
-			
+
 			for (index = 0; index < loops; index += 1) {
 				unique_id += generateRandomString();
 			}
 		});
-		
+
 		return unique_id;
 	}
-	
+
 	return function () {
 		var unique_id = generateUniqueId();
-		
+
 		while (aap.utils.isUndefined(unique_ids[unique_id]) === false) {
 			unique_id = generateUniqueId();
 		}
-		
+
 		unique_ids[unique_id] = true;
-		
+
 		return unique_id;
 	};
 }());

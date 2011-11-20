@@ -10,11 +10,10 @@ class Images {
 	 * Render a list of images in JSON
 	 * 
 	 * @static
-	 * @param int $number_of_images
 	 * @param string $path
-	 * @return string
+	 * @return array
 	 */
-	private static function renderImages($number_of_images, $path) {
+	private static function getImages($path) {
 		$files = array();
 
 		// try to get a directory handle
@@ -25,13 +24,7 @@ class Images {
 
 				// check if the file has a jpeg or gif extension
 				if (preg_match('/\.(gif|jpe?g)/', $file)) {
-					$number_of_images -= 1;
-					
 					$files[] = $file;
-
-					if ($number_of_images === 0) {
-						break;
-					}
         		}
     		}
 
@@ -39,7 +32,7 @@ class Images {
     		closedir($handle);
 		}
 
-		return json_encode($files);
+		return $files;
 	}
 
 	/**
@@ -57,9 +50,12 @@ class Images {
 		}
 
 		$path = dirname(__FILE__) . '/../images/';
+		$files = self::getImages($path);
+
+		shuffle($files);
 
 		//header('Content-Type: application/json');
 		header('Content-Type: text/plain');
-		echo self::renderImages($number_of_images, $path);
+		echo json_encode(array_slice($files, 0, $number_of_images));
 	}
 }

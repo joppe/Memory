@@ -22,7 +22,8 @@ var memory = (function ($) {
 			var game_api,
 				timer,
 				score,
-				navigation;
+				navigation,
+				cards;
 
 			// create the game api
 			game_api = {
@@ -43,6 +44,9 @@ var memory = (function ($) {
 					console.log('finished');
 				}
 			};
+
+			// create the cards
+			cards = memory.cards.create(cards_container_selector, 12);
 
 			// create the timer
 			timer = memory.timer.create(game_api, time_element_selector, 120);
