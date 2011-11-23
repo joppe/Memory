@@ -54,9 +54,16 @@ aap.preload = (function () {
 	 * @param {Function} callback
 	 */
 	function preloadImages(content, callback) {
-		var images = jQuery(content).find('img'),
+		var jContent = jQuery(content),
+            images = jContent.find('img'),
 			preload_element = getPreloadElement(),
 			image_count = images.length;
+
+        // check if the provided content is only a img tag
+        if (image_count === 0 && jContent.get(0).tagName.toLowerCase() === 'img') {
+            images = jContent;
+            image_count = 1;
+        }
 
 		/**
 		 * All images are loaded

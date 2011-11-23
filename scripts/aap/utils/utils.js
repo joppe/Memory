@@ -69,7 +69,26 @@ aap.utils = {
 		}
 
 		return text;
-	}
+	},
+
+    /**
+     * Count the number of properties for a given object
+     * 
+     * @param {Object} object
+     * @return {Number}
+     */
+    objectLength: function (object) {
+        var count = 0,
+            property;
+
+        for (property in object) {
+            if (object.hasOwnProperty(property)) {
+                count += 1;
+            }
+        }
+
+        return count;
+    }
 };
 aap.utils.createUniqueId = (function () {
 	var unique_ids = {},

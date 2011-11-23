@@ -24,6 +24,10 @@ memory.navigation = (function ($) {
 	function createNavigationElement(navigation_container, title, callback) {
 		var element = $('<li><a href="#">' + title + '</a></li>');
 
+        element.css({
+            display: 'none'
+        });
+
 		element.click(function (event) {
 			event.preventDefault();
 
@@ -87,27 +91,29 @@ memory.navigation = (function ($) {
 				navigation_api;
 
 			navigation_api = {
-				/**
-				 * Enable the navigation
-				 */
-				enable: function () {
-					navigation_container.off();
+                gameReady: function () {
+                    navigation.showStart();
+                    navigation.hidePause();
+                    navigation.hideReset();
+                },
+                
+                gameStarted: function () {
+                    navigation.hideStart();
+                    navigation.showPause();
+                    navigation.showReset();
+                },
+                
+                gamePaused: function () {
+                    navigation.showStart();
+                    navigation.hidePause();
+                    navigation.showReset();
+                },
 
-					navigation_container.removeClass('disabled');
-				},
-
-				/**
-				 * Disable the navigation
-				 */
-				disable: function () {
-					navigation_container.click(function (event) {
-						event.preventDefault();
-
-						if (navigation_container.hasClass('disabled') === false) {
-							navigation_container.addClass('disabled');
-						}
-					});
-				}
+                gameFinished: function () {
+                    navigation.hideStart();
+                    navigation.hidePause();
+                    navigation.showReset();
+                }
 			};
 
 			return navigation_api;

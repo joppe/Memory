@@ -1,9 +1,9 @@
-/*global memory, jQuery*/
+/*global memory, aap, jQuery*/
 
 /**
  * Digits module
  */
-aap.digits = (function ($) {
+memory.digits = (function ($) {
 	/**
 	 * Create a digit element
 	 *

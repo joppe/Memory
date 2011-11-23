@@ -1,4 +1,4 @@
-/*global memory, jQuery , setInterval, clearInterval*/
+/*global memory, jQuery, aap, setInterval, clearInterval*/
 
 memory.timer = (function ($) {
 	/**
@@ -66,7 +66,7 @@ memory.timer = (function ($) {
 			if (value === 0) {
 				stop(timer);
 			}
-		}, 200);
+		}, 1000);
 
 		timer.intervalIdentifier(interval_identifier);
 	}
@@ -81,7 +81,7 @@ memory.timer = (function ($) {
 		var timer,
 			timer_element = $(timer_element_selector),
 			start_value = Number(seconds),
-			digits = aap.digits.create(Number(start_value).toString(10).length, start_value, timer_element),
+			digits = memory.digits.create(Number(start_value).toString(10).length, start_value, timer_element),
 			value = Number(seconds),
 			interval_identifier,
 			triggers = [];

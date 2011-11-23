@@ -14,7 +14,7 @@ memory.score = (function ($) {
 		 */
 		create: function (score_element_selector) {
 			var score_element = $(score_element_selector),
-				digits = aap.digits.create(4, 0, score_element);
+				digits = memory.digits.create(4, 0, score_element);
 
 			return {
 				/**
