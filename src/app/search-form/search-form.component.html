@@ -1,0 +1,17 @@
+<form
+    action=""
+    [formGroup]="form"
+    (ngSubmit)="onSubmit(form.value)">
+    <div class="form-group">
+        <label for="query">Query</label>
+        <input
+            type="text"
+            class="form-control"
+            id="query"
+            placeholder="Search for images"
+            [formControl]="form.get('query')">
+    </div>
+    <button
+        class="btn  btn-primary"
+        type="submit">button</button>
+</form>
