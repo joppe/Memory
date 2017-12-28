@@ -1,0 +1,14 @@
+<div class="form-group">
+    <h3>Query</h3>
+    <input
+        type="text"
+        placeholder="Search for images"
+        #searchQuery
+        (keyup)="search(searchQuery.value)">
+</div>
+
+<ul>
+    <li *ngFor="let result of results | async">
+        <img src="{{ result.image }}" alt="">
+    </li>
+</ul>
