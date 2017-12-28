@@ -3,22 +3,30 @@ import {NgModule} from '@angular/core';
 
 
 import {AppComponent} from './app.component';
-import {SearchFormComponent} from './search-form/search-form.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
+import {ConfigComponent} from './config/config.component';
+import {GameComponent} from './game/game.component';
 
 
 @NgModule({
     declarations: [
         AppComponent,
-        SearchFormComponent
+        ConfigComponent,
+        GameComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
         FormsModule,
-        ReactiveFormsModule
-
+        HttpClientModule,
+        ReactiveFormsModule,
+        AppRoutingModule
     ],
-    providers: [],
+    providers: [
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {
