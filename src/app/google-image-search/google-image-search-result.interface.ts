@@ -1,4 +1,4 @@
-export interface SearchResultInterface {
+export interface GoogleImageSearchResultInterface {
     data: string[];
     status: number;
     message: string;

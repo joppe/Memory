@@ -2,13 +2,13 @@ import 'rxjs/add/operator/map';
 import {Inject, Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {SEARCH_QUERY_PLACEHOLDER, SEARCH_URL} from './google-image-seach.config';
-import {SearchResultInterface} from './search-result.interface';
 import {Observable} from 'rxjs/Observable';
 import {catchError} from 'rxjs/operators';
 import {of} from 'rxjs/observable/of';
+import {GoogleImageSearchResultInterface} from './google-image-search-result.interface';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable()
@@ -20,10 +20,10 @@ export class GoogleImageSearchService {
     ) {
     }
 
-    public search(query: string): Observable<SearchResultInterface> {
+    public search(query: string): Observable<GoogleImageSearchResultInterface> {
         const queryUrl: string = this.url.replace(this.queryPlaceholder, query);
 
-        return this.http.get<SearchResultInterface>(queryUrl, httpOptions).pipe(
+        return this.http.get<GoogleImageSearchResultInterface>(queryUrl, httpOptions).pipe(
             catchError(this.handleError(
                 'search',
                 {
@@ -35,8 +35,8 @@ export class GoogleImageSearchService {
         );
     }
 
-    private handleError(operation: string, result: SearchResultInterface) {
-        return (error: HttpErrorResponse): Observable<SearchResultInterface> => {
+    private handleError(operation: string, result: GoogleImageSearchResultInterface) {
+        return (error: HttpErrorResponse): Observable<GoogleImageSearchResultInterface> => {
             console.log(operation, error);
 
             result.message = `operation: ${operation}, message: ${error.message}`;

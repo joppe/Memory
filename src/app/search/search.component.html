@@ -1,14 +1,21 @@
-<div class="form-group">
-    <h3>Query</h3>
-    <input
-        type="text"
-        placeholder="Search for images"
-        #searchQuery
-        (keyup)="search(searchQuery.value)">
-</div>
+<h3>Query</h3>
+<input
+    type="text"
+    placeholder="Search for images"
+    #searchQuery
+    (keyup)="search(searchQuery.value)">
 
 <ul>
-    <li *ngFor="let result of results | async">
-        <img src="{{ result.image }}" alt="">
+    <li *ngFor="let card of preview">
+        <img src="{{ card.image }}" alt="">
+    </li>
+</ul>
+
+<ul>
+    <li *ngFor="let image of results | async">
+        <app-search-result
+            [image]="image"
+            [class.selected]="isSelectedImage(image)"
+            (click)="toggleImage(image)"></app-search-result>
     </li>
 </ul>

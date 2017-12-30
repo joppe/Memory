@@ -61,3 +61,8 @@ Observable
 - basic routing
 - restructuring search
 
+# Goal 29-12
+
+- npm scripts to start front- and backend
+- enable sass
+- select/unselect an image

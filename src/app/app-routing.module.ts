@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {ConfigComponent} from './config/config.component';
 import {GameComponent} from './game/game.component';
+import {SearchComponent} from './search/search.component';
 
 const routes: Routes = [
     {
@@ -15,8 +15,8 @@ const routes: Routes = [
         component: HomeComponent
     },
     {
-        path: 'config',
-        component: ConfigComponent
+        path: 'search',
+        component: SearchComponent
     },
     {
         path: 'game',
