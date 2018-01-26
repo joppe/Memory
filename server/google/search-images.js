@@ -2,7 +2,9 @@ const puppeteer = require('puppeteer');
 const URL = 'https://www.google.com/search?tbm=isch&hl=en-NL&source=hp&biw=&bih&btnG=Search+Images&gbv=2=&q=';
 
 module.exports.searchImages = async function (query) {
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch({
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
     const page = await browser.newPage();
 
     await page.goto(`${URL}${query}`, {

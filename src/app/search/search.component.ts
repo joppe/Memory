@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Subject} from 'rxjs/Subject';
-import {debounceTime, distinctUntilChanged, map, switchMap} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, map, switchMap, tap} from 'rxjs/operators';
 import {GoogleImageSearchService} from '../google-image-search/google-image-search.service';
 import {GoogleImageSearchResultInterface} from '../google-image-search/google-image-search-result.interface';
 import {GameService} from '../game/game.service';
@@ -18,6 +18,10 @@ export class SearchComponent implements OnInit {
 
     public preview: CardInterface[];
 
+    public loading = false;
+
+    public size = 12;
+
     public constructor(
         private imageSearch: GoogleImageSearchService,
         private game: GameService
@@ -27,6 +31,10 @@ export class SearchComponent implements OnInit {
 
     public ngOnInit(): void {
         this.results = this.queries.pipe(
+            tap(() => {
+                this.loading = true;
+            }),
+
             debounceTime(300),
 
             distinctUntilChanged(),
@@ -39,6 +47,10 @@ export class SearchComponent implements OnInit {
                 return result.data.map((image: string): string => {
                     return image;
                 });
+            }),
+
+            tap(() => {
+                this.loading = false;
             })
         );
     }

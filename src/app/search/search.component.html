@@ -1,21 +1,57 @@
-<h3>Query</h3>
-<input
-    type="text"
-    placeholder="Search for images"
-    #searchQuery
-    (keyup)="search(searchQuery.value)">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <form>
+                <h1>Query</h1>
 
-<ul>
-    <li *ngFor="let card of preview">
-        <img src="{{ card.image }}" alt="">
-    </li>
-</ul>
+                <div class="form-group">
+                    <input
+                        type="text"
+                        placeholder="Search for images"
+                        class="form-control"
+                        #searchQuery
+                        (keyup)="search(searchQuery.value)">
+                </div>
+            </form>
+        </div>
 
-<ul>
-    <li *ngFor="let image of results | async">
-        <app-search-result
-            [image]="image"
-            [class.selected]="isSelectedImage(image)"
-            (click)="toggleImage(image)"></app-search-result>
-    </li>
-</ul>
+        <div *ngIf="preview.length > 0" class="col-6l">
+            Select {{ size - preview.length }} more
+            <a *ngIf="size === preview.length" class="btn btn-primary" href="/game" role="button">Finish</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <img *ngIf="loading" src="/assets/loading.gif">
+
+            <ng-container *ngIf="(results | async)?.length > 0">
+                <h2>Results</h2>
+                <div class="alert alert-primary">
+                    click to toggle
+                </div>
+            </ng-container>
+
+            <div class="row">
+                <div class="col-3" *ngFor="let image of results | async">
+                    <app-search-result
+                        [image]="image"
+                        [class.selected]="isSelectedImage(image)"
+                        (click)="toggleImage(image)"></app-search-result>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <ng-container *ngIf="preview.length > 0">
+                <h2>Play cards</h2>
+            </ng-container>
+
+            <div class="row">
+                <div class="col-2" *ngFor="let card of preview">
+                    <app-preview-card [image]="card.image"></app-preview-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

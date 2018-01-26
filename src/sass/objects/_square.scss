@@ -1,0 +1,10 @@
+.o-square {
+    width: 100%;
+    overflow: hidden;
+}
+
+.o-square:after {
+    content: '';
+    display: block;
+    padding-bottom: 100%;
+}
